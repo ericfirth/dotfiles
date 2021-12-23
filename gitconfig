@@ -1,0 +1,31 @@
+
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+
+[user]
+	name = Eric Firth
+	email = eric.firth@vts.com
+[init]
+	templatedir = ~/.git_templates
+[color]
+	ui = true
+[push]
+	default = current
+[alias]
+	sla = log --oneline --decorate --graph --all
+	glog = log -E -i --grep
+	unstage = reset
+	uncommit = reset --soft HEAD^
+	b = branch
+	co = checkout
+  favlog = "!git --no-pager log --pretty=format:'%C(blue)%h%C(reset) - %s [%C(green)%ar%C(reset)] %an'"
+  last25 = "!git --no-pager log --pretty=format:'%C(blue)%h%C(reset) - %s [%C(green)%ar%C(reset)] %an' -25"
+  omrebase = "!git fetch --all && git rebase origin/master"
+  delbranch = "branch -D"
+  updatepush = "!git fetch --all && git rebase origin/master && git push -f --no-verify"
+	lc = show HEAD^..HEAD
+	staged = diff --cached
+	cane = commit --amend --no-edit
+[fetch]
+	prune = true
