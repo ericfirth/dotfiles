@@ -58,6 +58,7 @@ endif
 call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/ale.vim
+source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/fugitive.vim
