@@ -6,8 +6,6 @@
     ~/.gitconfig: gitconfig
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux
-    ~/.config/kitty:
-      path: kitty
-      force: true
-    ~/.config/nvim/: nvim
+    ~/.config/kitty: kitty
+    ~/.config/nvim: nvim
     ~/.zshrc: zshrc
