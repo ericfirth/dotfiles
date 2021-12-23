@@ -59,15 +59,25 @@ call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/ale.vim
 source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/lsp.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dracula.vim
+source ~/.config/nvim/plugins/endwise.vim
 source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/lastplace.vim
+source ~/.config/nvim/plugins/markdown_preview.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/polyglot.vim
+source ~/.config/nvim/plugins/projectionist.vim
+source ~/.config/nvim/plugins/quick_scope.vim
 source ~/.config/nvim/plugins/sort_motion.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/test.vim
 source ~/.config/nvim/plugins/ultisnips.vim
+source ~/.config/nvim/plugins/unimpaired.vim
+source ~/.config/nvim/plugins/which_key.vim
 
 call plug#end()
 doautocmd User PlugLoaded
@@ -80,58 +90,3 @@ doautocmd User PlugLoaded
 " call minpac#add('tpope/vim-speeddating')
 " call minpac#add('tpope/vim-obsession')
 " call minpac#add('ervandew/supertab')
-
-
-" call minpac#add('prabirshrestha/vim-lsp')
-" call minpac#add('mattn/vim-lsp-settings')
-" call minpac#add('prabirshrestha/asyncomplete.vim')
-" call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
-
-" map <leader>i mmgg=G`m
-" nmap <leader>so :source $MYVIMRC<cr>
-" nmap <leader>gs :Gstatus<cr>
-" nmap 0 ^
-
-
-
-" if executable('pyls')
-"     " pip install python-language-server
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'pyls',
-"         \ 'cmd': {server_info->['pyls']},
-"         \ 'allowlist': ['python'],
-"         \ })
-" endif
-
-" function! s:on_lsp_buffer_enabled() abort
-"     setlocal omnifunc=lsp#complete
-"     setlocal signcolumn=yes
-"     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-"     nmap <buffer> gd <plug>(lsp-definition)
-"     nmap <buffer> gs <plug>(lsp-document-symbol-search)
-"     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-"     nmap <buffer> gr <plug>(lsp-references)
-"     nmap <buffer> gi <plug>(lsp-implementation)
-"     nmap <buffer> gt <plug>(lsp-type-definition)
-"     nmap <buffer> <leader>rn <plug>(lsp-rename)
-"     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-"     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-"     nmap <buffer> K <plug>(lsp-hover)
-"     inoremap <buffer> <expr><c-f> lsp#scroll(+4)
-"     inoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
-"     let g:lsp_format_sync_timeout = 1000
-"     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-    
-"     " refer to doc to add more commands
-" endfunction
-
-" augroup lsp_install
-"     au!
-"     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-"     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-" augroup END
-
-" let g:asyncomplete_auto_popup = 0
-
-" let NERDTreeShowHidden=1

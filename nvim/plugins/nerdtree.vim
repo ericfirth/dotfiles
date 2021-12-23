@@ -21,6 +21,3 @@ let g:plug_window = 'noautocmd vertical topleft new'
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
-
-nmap <leader>nn :NERDTreeToggle<cr>
-nmap <leader>nf :NERDTreeFind<cr>
