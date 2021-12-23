@@ -3,5 +3,11 @@
 - link:
     ~/.bash_profile: bash_profile
     ~/.zprofile: zprofile
-
-
+    ~/.gitconfig: gitconfig
+    ~/.tmux.conf: tmux.conf
+    ~/.tmux: tmux
+    ~/.config/kitty:
+      path: kitty
+      force: true
+    ~/.config/nvim/: nvim
+    ~/.zshrc: zshrc
