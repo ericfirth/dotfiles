@@ -81,12 +81,3 @@ source ~/.config/nvim/plugins/which_key.vim
 
 call plug#end()
 doautocmd User PlugLoaded
-
-" call minpac#add('tpope/vim-unimpaired')
-" call minpac#add('tpope/vim-repeat')
-" call minpac#add('tpope/vim-sensible')
-" call minpac#add('tpope/vim-abolish')
-" call minpac#add('tpope/vim-endwise')
-" call minpac#add('tpope/vim-speeddating')
-" call minpac#add('tpope/vim-obsession')
-" call minpac#add('ervandew/supertab')

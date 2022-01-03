@@ -12,6 +12,8 @@ zplug load
 # prompt pure
 export EDITOR='vim'
 
+export ZSH_THEME="dracula-pro"
+
 COMPLETION_WAITING_DOTS="true"
 
 stty -ixon -ixoff 
