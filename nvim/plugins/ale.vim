@@ -1,7 +1,7 @@
 Plug 'w0rp/ale'
 
 let g:ale_completion_tsserver_autoimport = 1
-let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop'], 'typescript': ['eslint', 'tsserver'] }
+let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop', 'sorbet'], 'typescript': ['eslint', 'tsserver'] }
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']

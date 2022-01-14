@@ -66,6 +66,7 @@ source ~/.config/nvim/plugins/endwise.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/kitty.vim
 source ~/.config/nvim/plugins/lastplace.vim
 source ~/.config/nvim/plugins/markdown_preview.vim
 source ~/.config/nvim/plugins/nerdtree.vim

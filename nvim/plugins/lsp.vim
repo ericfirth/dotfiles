@@ -14,6 +14,17 @@ if executable('pyls')
         \ })
 endif
 
+if executable('srb')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'sorbet',
+        \ 'cmd': {server_info->['srb']},
+        \ 'allowlist': ['ruby'],
+        \ })
+endif
+
+
+
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
