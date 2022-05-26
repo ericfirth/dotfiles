@@ -10,4 +10,4 @@ nmap <leader>tv :TestVisit<CR>
 " let g:test#preserve_screen = 1
 let test#javascript#runner = 'jest'
 let test#javascript#jest#executable = 'yarn test'
-let test#strategy = "dispatch"
+let test#strategy = "neovim"

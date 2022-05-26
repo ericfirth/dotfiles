@@ -57,8 +57,10 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
+source ~/.config/nvim/plugins/abolish.vim
 source ~/.config/nvim/plugins/ale.vim
 source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/buffers.vim
 source ~/.config/nvim/plugins/lsp.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dracula.vim
@@ -73,6 +75,7 @@ source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/projectionist.vim
 source ~/.config/nvim/plugins/quick_scope.vim
+source ~/.config/nvim/plugins/session.vim
 source ~/.config/nvim/plugins/sort_motion.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/test.vim
