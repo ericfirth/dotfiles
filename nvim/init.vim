@@ -62,6 +62,7 @@ source ~/.config/nvim/plugins/ale.vim
 source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/buffers.vim
 source ~/.config/nvim/plugins/lsp.vim
+source ~/.config/nvim/plugins/copilot.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/endwise.vim
