@@ -4,8 +4,11 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
   'tsserver',
-  'srb',
   'eslint',
+  'tailwindcss',
+  'yamlls',
+  'stylelint_lsp',
+  'cssls',
   'rust_analyzer',
 })
 
