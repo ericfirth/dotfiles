@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
 	}
 
 	use({ 'rose-pine/neovim', as = 'rose-pine' })
+	use({ "ellisonleao/gruvbox.nvim" })
 
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
@@ -21,6 +22,7 @@ return require('packer').startup(function(use)
 	use('mbbill/undotree')
 	use('tpope/vim-surround')
 	use('tpope/vim-fugitive')
+	use('tpope/vim-rails')
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
@@ -50,5 +52,23 @@ return require('packer').startup(function(use)
 	}
 
 	use("klen/nvim-test")
+
+	use {
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		requires = { 
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		}
+	}
+
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+		options = { theme = 'gruvbox' }
+	}
+
+	use { "elentok/format-on-save.nvim" }
 
 end)

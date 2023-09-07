@@ -3,6 +3,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 export SHELL_SESSION_HISTORY=0
 
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug 'mafredri/zsh-async'
 # zplug 'sindresorhus/pure'
 zplug 'zsh-users/zsh-syntax-highlighting'
@@ -61,18 +63,6 @@ run_ci() {
 # autoload -Uz compinit
 # compinit
 
-
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
-
-  fpath+=($HOME/.zsh/pure)
-  autoload -U promptinit; promptinit
-  prompt pure
-    # POWERLEVEL10K
-
-##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
-fi
-
 # # Completion for kitty
 # # kitty + complete setup zsh | source /dev/stdin
 
@@ -80,7 +70,6 @@ fi
 # # Complete g like git
 # compdef g=git
 
-export PATH="$HOME/.dotfiles/scripts:$HOME/.pyenv/shims:$HOME/.nodenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PYENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 eval "$(nodenv init -)"
@@ -116,10 +105,7 @@ setopt extendedhistory
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-  export AWS_DEFAULT_REGION=us-east-2
-PATH="/usr/local/opt/grep/libexec/gnubin:/Users/ericfirth/.nodenv/shims:/Users/ericfirth/.pyenv/shims:/Users/ericfirth/.rbenv/shims:/Users/ericfirth/.nodenv/bin:/Users/ericfirth/.rbenv/bin:/Users/ericfirth/.rbenv/shims:/bin:/usr/local/Cellar/zplug/2.4.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/Library/Apple/usr/bin:/Applications/Postgres.app/Contents/Versions/latest/bin"
-export PATH="/Users/ericfirth/code/truva:$PATH"
-export PATH="/Users/ericfirth/code/truva:$PATH"
+export AWS_DEFAULT_REGION=us-east-2
 
 export GO111MODULE=on
 export GOPATH=~/.go
@@ -128,3 +114,4 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
+export PATH="$HOME/.dotfiles/scripts:$HOME/.pyenv/shims:$HOME/.nodenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PYENV_ROOT/bin:$PATH"
