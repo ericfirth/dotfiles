@@ -1,36 +1,50 @@
-local format_on_save = require("format-on-save")
-local formatters = require("format-on-save.formatters")
+-- Utilities for creating configurations
+local util = require "formatter.util"
 
-format_on_save.setup({
-	exclude_path_patterns = {
-		"/node_modules/",
-		".local/share/nvim/lazy",
-	},
-	formatter_by_ft = {
-		css = formatters.lsp,
-		html = formatters.lsp,
-		java = formatters.lsp,
-		javascript = formatters.lsp,
-		json = formatters.lsp,
-		lua = formatters.lsp,
-		markdown = formatters.prettierd,
-		openscad = formatters.lsp,
-		python = formatters.black,
-		rust = formatters.lsp,
-		ruby = formatters.prettierd,
-		scad = formatters.lsp,
-		scss = formatters.lsp,
-		sh = formatters.shfmt,
-		terraform = formatters.lsp,
-		typescript = formatters.prettierd,
-		typescriptreact = formatters.prettierd,
-		yaml = formatters.lsp,
-	},
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+require("formatter").setup {
+	-- Enable or disable logging
+	logging = true,
+	-- Set the log level
+	log_level = vim.log.levels.WARN,
+	-- All formatter configurations are opt-in
+	filetype = {
+		-- Formatter configurations for filetype "lua" go here
+		-- and will be executed in order
+		lua = {
+			-- "formatter.filetypes.lua" defines default configurations for the
+			-- "lua" filetype
+			require("formatter.filetypes.lua").stylua,
 
-	-- Optional: fallback formatter to use when no formatters match the current filetype
-	fallback_formatter = {
-		formatters.remove_trailing_whitespace,
-		formatters.remove_trailing_newlines,
-		formatters.prettierd,
+			-- You can also define your own configuration
+			function()
+				-- Supports conditional formatting
+				if util.get_current_buffer_file_name() == "special.lua" then
+					return nil
+				end
+
+				-- Full specification of configurations is down below and in Vim help
+				-- files
+				return {
+					exe = "stylua",
+					args = {
+						"--search-parent-directories",
+						"--stdin-filepath",
+						util.escape_path(util.get_current_buffer_file_path()),
+						"--",
+						"-",
+					},
+					stdin = true,
+				}
+			end
+		},
+
+		-- Use the special "*" filetype for defining formatter configurations on
+		-- any filetype
+		["*"] = {
+			-- "formatter.filetypes.any" defines default configurations for any
+			-- filetype
+			require("formatter.filetypes.any").remove_trailing_whitespace
+		}
 	}
-})
+}

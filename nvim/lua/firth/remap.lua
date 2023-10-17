@@ -7,7 +7,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>n", vim.cmd.Neotree)
+vim.keymap.set("n", "<leader>n", "<cmd>Neotree %<CR>")
+vim.keymap.set("n", "<cr>", "o<esc>k")
 
 -- greatest remap ever
 -- vim.keymap.set("x", "<leader>p", [["_dP]])
