@@ -36,6 +36,7 @@ alias editvim="cd ~/.dotfiles/nvim"
 alias vim="nvim"
 alias tf="terraform"
 alias dbdump="pg_restore --verbose --clean --no-acl --no-owner -h localhost -U viewthespace -d truva_development"
+alias prst="git diff --name-only --cached | xargs yarn prettier --write"
 
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -114,4 +115,4 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
-export PATH="$HOME/.dotfiles/scripts:$HOME/.pyenv/shims:$HOME/.nodenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.pyenv/shims:$HOME/.nodenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PYENV_ROOT/bin:$PATH"

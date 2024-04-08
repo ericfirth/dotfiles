@@ -39,6 +39,31 @@ require("formatter").setup {
 			end
 		},
 
+		typescriptreact = {
+			require("formatter.filetypes.typescriptreact").prettier,
+		},
+
+		typescript = {
+			require("formatter.filetypes.typescript").prettier,
+		},
+
+		javascript = {
+			require("formatter.filetypes.javascript").prettier,
+		},
+
+		ruby = {
+			require("formatter.filetypes.ruby").rubocop,
+			function()
+				return {
+					exe = "yarn prettier",
+					args = {
+						"--write",
+						util.escape_path(util.get_current_buffer_file_path()),
+					},
+				}
+			end
+		},
+
 		-- Use the special "*" filetype for defining formatter configurations on
 		-- any filetype
 		["*"] = {
