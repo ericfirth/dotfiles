@@ -159,6 +159,7 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+vim.opt.wrap = false
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -176,7 +177,8 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-vim.keymap.set('n', '<leader>n', '<cmd>Neotree %<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>Neotree %<CR>', { desc = 'Toggle [N]eotree' })
+vim.keymap.set('n', '<leader>ev', ':e $MYVIMRC<CR>', { desc = '[E]dit [V]imrc' })
 vim.keymap.set('n', '<cr>', 'o<esc>k', { desc = 'Create newline' })
 
 -- greatest remap ever
@@ -246,6 +248,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-surround', -- Surround text with brackets, quotes, etc.
+  'tpope/vim-repeat', -- Enable repeating supported plugin maps with `.`
+  'christoomey/vim-sort-motion', -- Sort lines based on a motion
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -388,13 +393,13 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch [B]uffers' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -784,9 +789,87 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-  { 'theprimeagen/harpoon' },
+  {
+    'theprimeagen/harpoon',
+    config = function()
+      local mark = require 'harpoon.mark'
+      local ui = require 'harpoon.ui'
+
+      vim.keymap.set('n', '<leader>a', mark.add_file)
+      vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
+
+      vim.keymap.set('n', '<C-h>', function()
+        ui.nav_file(1)
+      end)
+      vim.keymap.set('n', '<C-t>', function()
+        ui.nav_file(2)
+      end)
+      vim.keymap.set('n', '<C-n>', function()
+        ui.nav_file(3)
+      end)
+      vim.keymap.set('n', '<C-s>', function()
+        ui.nav_file(4)
+      end)
+    end,
+  },
   { 'github/copilot.vim' },
   { 'tpope/vim-rails' },
+  { 'alexghergh/nvim-tmux-navigation' },
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+  {
+    'klen/nvim-test',
+    config = function()
+      require('nvim-test').setup {
+        run = true, -- run tests (using for debug)
+        commands_create = true, -- create commands (TestFile, TestLast, ...)
+        filename_modifier = ':.', -- modify filenames before tests run(:h filename-modifiers)
+        silent = false, -- less notifications
+        term = 'terminal', -- a terminal to run ("terminal"|"toggleterm")
+        termOpts = {
+          direction = 'vertical', -- terminal's direction ("horizontal"|"vertical"|"float")
+          width = 96, -- terminal's width (for vertical|float)
+          height = 24, -- terminal's height (for horizontal|float)
+          go_back = false, -- return focus to original window after executing
+          stopinsert = 'auto', -- exit from insert mode (true|false|"auto")
+          keep_one = true, -- keep only one terminal for testing
+        },
+        runners = { -- setup tests runners
+          cs = 'nvim-test.runners.dotnet',
+          go = 'nvim-test.runners.go-test',
+          haskell = 'nvim-test.runners.hspec',
+          javascriptreact = 'nvim-test.runners.jest',
+          javascript = 'nvim-test.runners.jest',
+          lua = 'nvim-test.runners.busted',
+          python = 'nvim-test.runners.pytest',
+          ruby = 'nvim-test.runners.rspec',
+          rust = 'nvim-test.runners.cargo-test',
+          typescript = 'nvim-test.runners.jest',
+          typescriptreact = 'nvim-test.runners.jest',
+        },
+      }
+
+      require('nvim-test.runners.rspec'):setup {
+        command = 'bundle',
+      }
+
+      vim.keymap.set('n', '<leader>tf', vim.cmd.TestFile)
+      vim.keymap.set('n', '<leader>tn', vim.cmd.TestNearest)
+      vim.keymap.set('n', '<leader>tl', vim.cmd.TestLast)
+    end,
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -825,6 +908,17 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
+  },
+  {
+    'olimorris/persisted.nvim',
+    lazy = false, -- make sure the plugin is always loaded at startup
+    config = true,
+  },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
