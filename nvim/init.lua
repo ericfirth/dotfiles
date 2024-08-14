@@ -814,6 +814,7 @@ require('lazy').setup({
   },
   { 'github/copilot.vim' },
   { 'tpope/vim-rails' },
+  { 'tpope/vim-fugitive' },
   { 'alexghergh/nvim-tmux-navigation' },
   {
     'nvim-neo-tree/neo-tree.nvim',

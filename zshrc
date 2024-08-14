@@ -1,7 +1,8 @@
 set -o vi
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 export SHELL_SESSION_HISTORY=0
+export DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock
 
 zplug mafredri/zsh-async, from:github
 zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
@@ -112,6 +113,8 @@ export GO111MODULE=on
 export GOPATH=~/.go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
