@@ -4,3 +4,5 @@ export PYENV_ROOT="$HOME/.pyenv"
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

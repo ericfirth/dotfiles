@@ -5,7 +5,7 @@
 
 [user]
 	name = Eric Firth
-	email = eric.firth@vts.com
+	email = eric.firth@datadoghq.com
 [init]
 	templatedir = ~/.git_templates
 [color]

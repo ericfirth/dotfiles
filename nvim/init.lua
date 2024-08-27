@@ -573,8 +573,6 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        sorbet = {},
-        rubocop = {},
         --
 
         lua_ls = {
@@ -659,7 +657,6 @@ require('lazy').setup({
         javascript = { { 'prettierd', 'prettier' } },
         typescript = { { 'prettierd', 'prettier' } },
         typescriptreact = { { 'prettierd', 'prettier' } },
-        ruby = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -855,15 +852,10 @@ require('lazy').setup({
           javascript = 'nvim-test.runners.jest',
           lua = 'nvim-test.runners.busted',
           python = 'nvim-test.runners.pytest',
-          ruby = 'nvim-test.runners.rspec',
           rust = 'nvim-test.runners.cargo-test',
           typescript = 'nvim-test.runners.jest',
           typescriptreact = 'nvim-test.runners.jest',
         },
-      }
-
-      require('nvim-test.runners.rspec'):setup {
-        command = 'bundle',
       }
 
       vim.keymap.set('n', '<leader>tf', vim.cmd.TestFile)

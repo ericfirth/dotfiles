@@ -1,8 +1,6 @@
 set -o vi
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
-export SHELL_SESSION_HISTORY=0
-export DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock
 
 zplug mafredri/zsh-async, from:github
 zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
@@ -15,28 +13,17 @@ zplug load
 export EDITOR='vim'
 
 
-COMPLETION_WAITING_DOTS="true"
-
-stty -ixon -ixoff 
-stty start undef stop undef
-
 alias ls='ls -FG'
 alias ez="vim  ~/.zshrc"
 alias sz="source  ~/.zshrc"
 alias et="vim ~/.tmux.conf"
 alias be="bundle exec"
 alias delbranch='git branch -D'
-alias branches="~/bin/branches"
-alias compose="sudo docker-compose up -d"
 alias vim="nvim"
 
-alias aok="rubocop && yarn lint && yarn test && rspec"
 alias ypw="yarn prettier --write"
-alias trv="cd ~/code/truva"
-alias editvim="cd ~/.dotfiles/nvim"
 alias vim="nvim"
 alias tf="terraform"
-alias dbdump="pg_restore --verbose --clean --no-acl --no-owner -h localhost -U viewthespace -d truva_development"
 alias prst="git diff --name-only --cached | xargs yarn prettier --write"
 
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -56,18 +43,6 @@ g() {
   fi
 }
 
-run_ci() {
-  gh workflow run master_commit.yaml --ref $(git rev-parse --abbrev-ref HEAD)
-  sleep 5
-  open https://github.com/viewthespace/truva/actions/runs/$(gh run list --workflow=master_commit.yaml -b $(git rev-parse --abbrev-ref HEAD) | head -1 | cut -f7)
-}
-
-# autoload -Uz compinit
-# compinit
-
-# # Completion for kitty
-# # kitty + complete setup zsh | source /dev/stdin
-
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # # Complete g like git
 # compdef g=git
@@ -76,14 +51,7 @@ eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 eval "$(nodenv init -)"
 
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-# unsetopt nomatch
-
 #   # Terraform
-
-export AWS_DEFAULT_REGION=us-east-2
-
-export SIDEKIQ_CREDS=99c62bd8:cbc6e930
 
 alias history='history 1'
 #set history size
@@ -119,3 +87,66 @@ test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 export PATH="$HOME/bin:$HOME/.pyenv/shims:$HOME/.nodenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PYENV_ROOT/bin:$PATH"
+# BEGIN ANSIBLE MANAGED BLOCK
+# Load homebrew shell variables
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Force certain more-secure behaviours from homebrew
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+export HOMEBREW_CASK_OPTS=--require-sha
+export HOMEBREW_DIR=/opt/homebrew
+export HOMEBREW_BIN=/opt/homebrew/bin
+
+# Load python shims
+eval "$(pyenv init -)"
+
+# Load ruby shims
+eval "$(rbenv init -)"
+
+# Prefer GNU binaries to Macintosh binaries.
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# Add datadog devtools binaries to the PATH
+export PATH="$HOME/dd/devtools/bin:$PATH"
+
+# Point GOPATH to our go sources
+export GOPATH="$HOME/go"
+
+# Add binaries that are go install-ed to PATH
+export PATH="$GOPATH/bin:$PATH"
+
+# Point DATADOG_ROOT to ~/dd symlink
+export DATADOG_ROOT="$HOME/dd"
+
+# Tell the devenv vm to mount $GOPATH/src rather than just dd-go
+export MOUNT_ALL_GO_SRC=1
+
+# store key in the login keychain instead of aws-vault managing a hidden keychain
+export AWS_VAULT_KEYCHAIN_NAME=login
+
+# tweak session times so you don't have to re-enter passwords every 5min
+export AWS_SESSION_TTL=24h
+export AWS_ASSUME_ROLE_TTL=1h
+
+# Helm switch from storing objects in kubernetes configmaps to
+# secrets by default, but we still use the old default.
+export HELM_DRIVER=configmap
+
+# Go 1.16+ sets GO111MODULE to off by default with the intention to
+# remove it in Go 1.18, which breaks projects using the dep tool.
+# https://blog.golang.org/go116-module-changes
+export GO111MODULE=auto
+export GOPRIVATE=github.com/DataDog
+# Configure Go to pull go.ddbuild.io packages.
+export GOPROXY=binaries.ddbuild.io,https://proxy.golang.org,direct
+export GONOSUMDB=github.com/DataDog,go.ddbuild.io
+# END ANSIBLE MANAGED BLOCK
+export GITLAB_TOKEN=$(security find-generic-password -a ${USER} -s gitlab_token -w)
+
+# Update with your preference
+export DATADOG_ROOT=~/dd
+# Force certain more-secure behaviours from homebrew
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+export HOMEBREW_CASK_OPTS=--require-sha
+# Add devtools binaries in your PATH, so you have access to 'to-staging' and 'branches-status'
+export PATH="$PATH:$DATADOG_ROOT/devtools/bin"
