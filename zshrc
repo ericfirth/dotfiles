@@ -12,14 +12,18 @@ zplug load
 
 export EDITOR='vim'
 
+eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
 
-alias ls='ls -FG'
+
 alias ez="vim  ~/.zshrc"
 alias sz="source  ~/.zshrc"
 alias et="vim ~/.tmux.conf"
 alias be="bundle exec"
 alias delbranch='git branch -D'
 alias vim="nvim"
+alias ls="eza -l --icons"
+alias cd="z"
 
 alias ypw="yarn prettier --write"
 alias vim="nvim"
@@ -30,8 +34,6 @@ alias prst="git diff --name-only --cached | xargs yarn prettier --write"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 # # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #
-
-eval "$(direnv hook zsh)"
 
 # # No arguments: `git status`
 # # # With arguments: acts like `git`
@@ -103,8 +105,17 @@ eval "$(pyenv init -)"
 # Load ruby shims
 eval "$(rbenv init -)"
 
+# Point DATADOG_ROOT to ~/dd symlink
+export DATADOG_ROOT="$HOME/dd"
+
+
+# Load commit signing SSH Key if not in the agent already
+ssh-add -l | grep "+git-commit-signing@datadoghq.com" > /dev/null || ssh-add --apple-use-keychain /Users/eric.firth/.ssh/datadog_git_commit_signing 2> /dev/null
+
 # Prefer GNU binaries to Macintosh binaries.
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Add datadog devtools binaries to the PATH
 export PATH="$HOME/dd/devtools/bin:$PATH"
@@ -114,9 +125,6 @@ export GOPATH="$HOME/go"
 
 # Add binaries that are go install-ed to PATH
 export PATH="$GOPATH/bin:$PATH"
-
-# Point DATADOG_ROOT to ~/dd symlink
-export DATADOG_ROOT="$HOME/dd"
 
 # Tell the devenv vm to mount $GOPATH/src rather than just dd-go
 export MOUNT_ALL_GO_SRC=1
