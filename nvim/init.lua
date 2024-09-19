@@ -661,6 +661,12 @@ require('lazy').setup({
     },
   },
 
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+  },
+
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -903,27 +909,11 @@ require('lazy').setup({
   },
 
   {
-    'rmagatti/auto-session',
-    lazy = false,
-    dependencies = {
-      'nvim-telescope/telescope.nvim', -- Only needed if you want to use session lens
-    },
-    use_git_branch = true,
-
-    ---enables autocomplete for opts
-    ---@module "auto-session"
-    ---@type AutoSession.Config
-    opts = {
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      -- log_level = 'debug',
-    },
-  },
-
-  {
     'kylechui/nvim-surround',
     version = '*', -- Use for stability; omit to use `main` branch for the latest features
     event = 'VeryLazy',
   },
+
   {
     'olimorris/persisted.nvim',
     lazy = false, -- make sure the plugin is always loaded at startup

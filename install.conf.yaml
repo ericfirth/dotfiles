@@ -9,6 +9,7 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.zshrc: zshrc
+    ~/.config/zellij: zellij
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
